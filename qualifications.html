@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Qualifications</title>
+    <style>
+      .qualifications ul li {
+        opacity: 0;
+        transform: translateX(-100%);
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+      }
+
+      .qualifications ul li span {
+        font-weight: bold;
+        display: inline-block;
+        width: 200px;
+      }
+
+      .qualifications ul li:nth-child(1) { transition-delay: 0.1s; }
+      .qualifications ul li:nth-child(2) { transition-delay: 0.2s; }
+      .qualifications ul li:nth-child(3) { transition-delay: 0.3s; }
+      .qualifications ul li:nth-child(4) { transition-delay: 0.4s; }
+      .qualifications ul li:nth-child(5) { transition-delay: 0.5s; }
+
+      .qualifications ul li.show {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      ul {
+        list-style-type: circle;
+        padding: 0;
+        margin: 50px;
+      }
+      li {
+        font-size: 2em;
+        margin-bottom: 25px;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body style="background-color:white;">
+    <div class="qualifications">
+      <h1 style="color:#1c3548;font-size: 3.5em;background-color: #FFEFC4;border-radius: 20px;">Qualifications</h1>
+      <hr>
+      <ul style="color:#1c3548;">
+        <li><span>10th Class:</span> Sri Chaitanya High School, 2012</li>
+        <li><span>12th Class:</span> Delhi Public School, 2014</li>
+        <li><span>B.Tech in Computer Science:</span> SRM University, 2018</li>
+        <li><span>M.Tech in Computer Science:</span> IIT-Chennai, 2020</li>
+      </ul>
+	<hr>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('.qualifications ul li').each(function(i) {
+          setTimeout(function() {
+            $('.qualifications ul li').eq(i).addClass('show');
+          }, 200 * i);
+        });
+      });
+    </script>
+  </body>
+</html>
+#FFFAF0

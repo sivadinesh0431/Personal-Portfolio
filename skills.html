@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Skills</title>
+    <style>
+      .qualifications ul li {
+        opacity: 0;
+        transform: translateX(-100%);
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+      }
+
+      .qualifications ul li span {
+        font-weight: bold;
+        display: inline-block;
+        width: 100%;
+      }
+
+      .qualifications ul li:nth-child(1) { transition-delay: 0.1s; }
+      .qualifications ul li:nth-child(2) { transition-delay: 0.2s; }
+      .qualifications ul li:nth-child(3) { transition-delay: 0.3s; }
+      .qualifications ul li:nth-child(4) { transition-delay: 0.4s; }
+      .qualifications ul li:nth-child(5) { transition-delay: 0.5s; }
+
+      .qualifications ul li.show {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .container {
+        display: flex;
+        flex-direction: row;
+      }
+      .half {
+        width: 80%;
+        padding: 50px;
+      }
+      h1 {
+        color: #1c3548;
+        font-size:3.5em;
+        background-color:#FFEFC4;
+  	border-radius:20px;
+	margin-bottom:20px;
+      }
+      ul {
+        list-style-type:circle;
+        padding:0;
+	margin:40px;
+      }
+      li {
+        font-size:2em;
+        font-style:italic;
+	margin-bottom:20px;
+      }
+    </style>
+  </head>
+  <body style="background-color:white;">
+    <div class="container">
+    
+    <div class="half">
+
+     <div class="qualifications">
+        <h1>Technical Skills</h1>
+        <ul style="color:#1c3548;">
+          <li>C</li>
+          <li>Python</li>
+          <li>Linux</li>
+          <li>C++</li>
+          <li>HTML</li>
+          <li>Java</li>
+        </ul>
+      </div>
+   </div>
+
+	<hr>
+      <div class="half">
+
+	<div class="qualifications">
+        <h1>Soft Skills</h1>
+        <ul style="color:#1c3548;">
+          <li>Leadership Qualities</li>
+          <li>Team Management</li>
+          <li>Active Listening</li>
+	  <li>Stress Management</li>
+	  <li>Good Communication</li>
+          <li>Working under pressure</li>
+        </ul>
+      </div>
+
+    </div>
+
+   </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('.qualifications ul li').each(function(i) {
+          setTimeout(function() {
+            $('.qualifications ul li').eq(i).addClass('show');
+          }, 200 * i);
+        });
+      });
+    </script>
+  </body>
+</html>

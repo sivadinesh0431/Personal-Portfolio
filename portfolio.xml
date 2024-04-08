@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portfolio>
+    <contact>
+        <email>sivadinesh0431@gmail.com</email>
+        <instagram>__sivadinesh__</instagram>
+    </contact>
+    <about>
+        <name>Siva Dinesh</name>
+        <profession>Web Developer</profession>
+        <bio>
+            I am a passionate web developer with expertise in HTML, CSS, and JavaScript. 
+            I love building responsive and user-friendly websites.
+        </bio>
+        <skills>
+            <skill>HTML</skill>
+            <skill>CSS</skill>
+            <skill>JavaScript</skill>
+ 
+        </skills>
+        <experience>
+            <position>Frontend Developer</position>
+            <company>Cyber Company</company>
+            <duration>2019 - Present</duration>
+        </experience>
+
+    </about>
+</portfolio>

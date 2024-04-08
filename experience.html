@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Experiences</title>
+    <style>
+      .experiences ul li {
+        opacity: 0;
+        transform: translateX(-100%);
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+      }
+
+      .experiences ul li span {
+        font-weight: bold;
+        display: inline-block;
+        width: 200px;
+      }
+
+      .experiences ul li:nth-child(1) { transition-delay: 0.1s; }
+      .experiences ul li:nth-child(2) { transition-delay: 0.2s; }
+      .experiences ul li:nth-child(3) { transition-delay: 0.3s; }
+      .experiences ul li:nth-child(4) { transition-delay: 0.4s; }
+      .experiences ul li:nth-child(5) { transition-delay: 0.5s; }
+
+      .experiences ul li.show {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      ul {
+        list-style-type: circle;
+        padding: 0;
+        margin: 50px;
+      }
+      li {
+        font-size: 2em;
+        margin-bottom: 25px;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body style="background-color:white;">
+    <div class="experiences">
+      <h1 style="color:#1c3548;font-size: 3.5em;background-color: #FFEFC4;border-radius: 20px;">Experiences</h1>
+      <hr>
+      <ul style="color:#1c3548;">
+        <li><span> Cisco:  </span> <strong>Security Engineer  |  2020-22</strong></li>
+        <li><span> Cognizant: </span><strong>Security Analyst  |  2022-23</strong></li>
+        
+      </ul>
+	<hr>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('.experiences ul li').each(function(i) {
+          setTimeout(function() {
+            $('.experiences ul li').eq(i).addClass('show');
+          }, 200 * i);
+        });
+      });
+    </script>
+  </body>
+</html>
