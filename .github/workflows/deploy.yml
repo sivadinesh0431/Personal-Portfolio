@@ -45,7 +45,7 @@ jobs:
         ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
 
         # SSH into the EC2 instance and update Docker image
-        ssh -o StrictHostKeyChecking=no $USER@$HOST << 'EOF'
+        ssh -o StrictHostKeyChecking=no $USER@$HOST << EOF
           docker login -u $DOCKER_USERNAME -p ${{ secrets.DOCKER_PASSWORD }}
           docker pull $DOCKER_USERNAME/my-website:latest
           docker stop my-website || true
