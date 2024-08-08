@@ -51,4 +51,4 @@ jobs:
           docker stop my-website || true
           docker rm my-website || true
           docker run -d --name my-website -p 80:80 $DOCKER_USERNAME/my-website:latest
-'EOF'
+        EOF
