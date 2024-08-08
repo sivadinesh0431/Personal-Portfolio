@@ -23,4 +23,5 @@ jobs:
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
-        rsync -avz --delete . $USER@$HOST:/usr/share/nginx/html/
+        rsync -avz --delete . $USER@$HOST:/usr/share/nginx/html/ --rsync-path="sudo rsync"
+
