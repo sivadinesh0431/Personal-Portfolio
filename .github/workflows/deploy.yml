@@ -1,4 +1,4 @@
-name: Deploy to EC2 in aws
+name: Deploy to EC2
 
 on:
   push:
@@ -38,17 +38,17 @@ jobs:
         HOST: ${{ secrets.EC2_HOST }}
         USER: ${{ secrets.EC2_USER }}
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
         mkdir -p ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
 
-        # SSH into the EC2 instance and update Docker image
-        ssh -o StrictHostKeyChecking=no $USER@$HOST << 'EOF'
-          docker login -u $DOCKER_USERNAME -p ${{ secrets.DOCKER_PASSWORD }}
-          docker pull $DOCKER_USERNAME/my-website:latest
-          docker stop my-website || true
-          docker rm my-website || true
-          docker run -d --name my-website -p 80:80 $DOCKER_USERNAME/my-website:latest
-        EOF
+        ssh -o StrictHostKeyChecking=no $USER@$HOST << 'SCRIPT'
+          sudo docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          sudo docker pull $DOCKER_USERNAME/my-website:latest
+          sudo docker stop my-website || true
+          sudo docker rm my-website || true
+          sudo docker run -d --name my-website -p 80:80 $DOCKER_USERNAME/my-website:latest
+        SCRIPT
