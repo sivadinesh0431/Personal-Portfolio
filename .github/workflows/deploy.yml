@@ -13,15 +13,42 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Log in to Docker Hub
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+    - name: Build the Docker image
+      run: |
+        docker build -t my-website:latest .
+
+    - name: Tag the Docker image
+      run: |
+        docker tag my-website:latest ${{ secrets.DOCKER_USERNAME }}/my-website:latest
+
+    - name: Push the Docker image to Docker Hub
+      run: |
+        docker push ${{ secrets.DOCKER_USERNAME }}/my-website:latest
+
     - name: Deploy to EC2
       env:
         SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         HOST: ${{ secrets.EC2_HOST }}
         USER: ${{ secrets.EC2_USER }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: |
         mkdir -p ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
-        rsync -avz --delete . $USER@$HOST:/usr/share/nginx/html/ --rsync-path="sudo rsync"
 
+        # SSH into the EC2 instance and update Docker image
+        ssh -o StrictHostKeyChecking=no $USER@$HOST << 'EOF'
+          docker login -u $DOCKER_USERNAME -p ${{ secrets.DOCKER_PASSWORD }}
+          docker pull $DOCKER_USERNAME/my-website:latest
+          docker stop my-website || true
+          docker rm my-website || true
+          docker run -d --name my-website -p 80:80 $DOCKER_USERNAME/my-website:latest
+EOF
